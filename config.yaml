@@ -1,0 +1,57 @@
+github:
+  username: "craig330D"
+  token_env: "GITHUB_PAT"
+  poll_interval: "daily"
+  exclude_repos:
+    - "craig330D/MT5EA"
+    - "craig330D/prism"
+  exclude_owners: []
+  include_private: true
+
+embedding:
+  model: "all-MiniLM-L6-v2"
+  device: "cpu"
+  batch_size: 64
+
+qdrant:
+  host: "localhost"
+  port: 6333
+  collection: "git-skills"
+  vector_size: 384
+
+indexer:
+  clone_dir: "/tmp/git-skill-indexer/repos"
+  max_file_size_kb: 500
+  include_extensions:
+    - ".py"
+    - ".js"
+    - ".ts"
+    - ".jsx"
+    - ".tsx"
+    - ".go"
+    - ".rs"
+    - ".md"
+    - ".yaml"
+    - ".yml"
+    - ".toml"
+    - ".json"
+    - ".sh"
+    - ".mql5"
+    - ".mq5"
+  exclude_patterns:
+    - "node_modules/**"
+    - ".git/**"
+    - "*.lock"
+    - "package-lock.json"
+    - "*.min.js"
+    - "*.min.css"
+    - "dist/**"
+    - "build/**"
+    - "__pycache__/**"
+    - ".venv/**"
+    - "vendor/**"
+
+server:
+  host: "0.0.0.0"
+  port: 8420
+  mcp_enabled: true

@@ -1,0 +1,15 @@
+[Unit]
+Description=Git Skill Indexer - Query API
+After=network.target docker.service
+
+[Service]
+Type=simple
+User=craig
+WorkingDirectory=/opt/git-skill-indexer
+ExecStart=/opt/git-skill-indexer/.venv/bin/uvicorn src.server:app --host 0.0.0.0 --port 8420
+Restart=always
+RestartSec=10
+Environment=GITHUB_PAT_FILE=/home/craig/.secrets/github_pat
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,21 @@
+[project]
+name = "git-skill-indexer"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "sentence-transformers>=3.0.0",
+    "qdrant-client>=1.9.0",
+    "fastapi>=0.111.0",
+    "uvicorn>=0.30.0",
+    "gitpython>=3.1.0",
+    "requests>=2.32.0",
+    "pyyaml>=6.0.0",
+    "click>=8.1.0",
+]
+
+[project.scripts]
+git-skill-indexer = "src.cli:main"
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"

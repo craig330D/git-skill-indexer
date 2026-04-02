@@ -1,0 +1,15 @@
+[Unit]
+Description=Git Skill Indexer - Sync starred repos
+After=network.target docker.service
+
+[Service]
+Type=oneshot
+User=craig
+WorkingDirectory=/opt/git-skill-indexer
+ExecStart=/opt/git-skill-indexer/.venv/bin/python -m src.cli sync
+Environment=GITHUB_PAT_FILE=/home/craig/.secrets/github_pat
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
