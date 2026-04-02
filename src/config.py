@@ -16,9 +16,14 @@ def load_config(path: Path | None = None) -> dict:
     with open(path) as f:
         cfg = yaml.safe_load(f)
 
-    # Resolve GitHub PAT from env var
+    # Resolve GitHub PAT: try env var first, then file
     token_env = cfg.get("github", {}).get("token_env", "GITHUB_PAT")
-    cfg["github"]["token"] = os.environ.get(token_env, "")
+    token = os.environ.get(token_env, "")
+    if not token:
+        pat_file = os.environ.get("GITHUB_PAT_FILE", "")
+        if pat_file and Path(pat_file).is_file():
+            token = Path(pat_file).read_text().strip()
+    cfg["github"]["token"] = token
 
     # Ensure defaults
     cfg.setdefault("embedding", {})
